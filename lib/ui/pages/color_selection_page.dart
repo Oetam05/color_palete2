@@ -6,7 +6,9 @@ import '../../utils/color_utils.dart';
 import '../widgets/color_palette.dart';
 
 class ColorSelectionPage extends StatelessWidget {
-  const ColorSelectionPage({Key? key}) : super(key: key);
+  const ColorSelectionPage({Key? key, required this.callback})
+      : super(key: key);
+  final Function(String) callback;
 
   void showDialog() {
     Get.dialog(const AlertDialog(
@@ -19,6 +21,7 @@ class ColorSelectionPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: const Text('Color palette app'),
           actions: [
             IconButton(onPressed: showDialog, icon: Icon(Icons.info_outline))
@@ -82,5 +85,6 @@ class ColorSelectionPage extends StatelessWidget {
 
   void showColor(String value) {
     // aqui llamar al callback del main widget
+    callback(value);
   }
 }
